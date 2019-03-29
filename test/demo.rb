@@ -4,9 +4,9 @@ require_relative '../lib/netflix.rb'
 require_relative '../lib/theater.rb'
 require 'csv'
 require 'money'
-movies = Kino::MovieCollection.new('lib/movies.txt')
-netflix = Kino::Netflix.new('lib/movies.txt')
-theater = Kino::Theater.new('lib/movies.txt')
+movies = Kino::MovieCollection.new('../lib/movies.txt')
+netflix = Kino::Netflix.new('../lib/movies.txt')
+theater = Kino::Theater.new('../lib/movies.txt')
 #puts 'ALL'
 #puts movies.all.first(0)
 #puts 'SORTED'
