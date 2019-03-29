@@ -1,8 +1,20 @@
 require 'csv'
 require_relative 'movie_collection.rb'
+require 'virtus'
 module Kino
   class Movie
-    attr_reader :link, :name, :year, :country, :date, :genre, :time, :rate, :producer, :actors
+    include Virtus.model
+
+    attribute :limk, String
+    attribute :name, String
+    attribute :year, Integer
+    attribute :country, String
+    attribute :date, String
+    attribute :genre, String
+    attribute :time, Integer
+    attribute :rate, String
+    attribute :producer, String
+    attribute :actors, String
     def initialize(movie_data, ginfo, bigcol) # rubocop:disable Metrics/AbcSize
       @link = movie_data[:link]
       @name = movie_data[:name]
