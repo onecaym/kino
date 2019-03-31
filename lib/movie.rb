@@ -5,27 +5,30 @@ module Kino
   class Movie
     include Virtus.model
 
-    attribute :limk, String
+  class Minutes < Virtus::Attribute
+    def coerce(value)
+      value.to_i
+    end
+  end
+
+  class StringArray < Virtus::Attribute
+    def coerce(value)
+      value.split(',').to_a
+    end
+  end
+
+    attribute :link, String
     attribute :name, String
-    attribute :year, Integer
+    attribute :year, Minutes
     attribute :country, String
     attribute :date, String
-    attribute :genre, String
-    attribute :time, Integer
+    attribute :genre, StringArray
+    attribute :time, Minutes
     attribute :rate, String
     attribute :producer, String
-    attribute :actors, String
-    def initialize(movie_data, ginfo, bigcol) # rubocop:disable Metrics/AbcSize
-      @link = movie_data[:link]
-      @name = movie_data[:name]
-      @year = movie_data[:year].to_i
-      @country = movie_data[:country]
-      @date = movie_data[:date]
-      @genre = movie_data[:genre].split(',')
-      @time = movie_data[:time].to_i
-      @rate = movie_data[:rate]
-      @producer = movie_data[:producer]
-      @actors = movie_data[:actors].split(',')
+    attribute :actors, StringArray
+    def initialize(hash = {}, ginfo, bigcol) # rubocop:disable Metrics/AbcSize
+      super(hash)
       @information = ginfo
       @bigcol = bigcol
     end
