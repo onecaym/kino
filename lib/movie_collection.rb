@@ -66,5 +66,9 @@ module Kino
              .flatten.group_by { |x| x }
              .map { |head, value| "#{head}: #{value.count}" }
     end
+
+    def genrelist
+      @movies.flat_map(&:genre).uniq
+    end
   end
 end

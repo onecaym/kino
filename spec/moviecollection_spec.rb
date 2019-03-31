@@ -66,5 +66,11 @@ module Kino
         end
       end
     end
+
+    describe '.genrelist' do
+      it 'returns full list of genres' do
+        expect(movies.genrelist.first).to eq('Crime')
+      end
+    end
   end
 end

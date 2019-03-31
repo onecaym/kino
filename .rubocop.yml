@@ -1,12 +1,12 @@
 
 AllCops:
   Exclude:
-    - lib/demo.rb
+    - test/demo.rb
     - lib/spec_helper.rb
 Metrics/LineLength:
   Max: 99
   Exclude:
-    - Exclude: spec/*.rb
+    - spec/*.rb
 Style/Documentation:
   Enabled: false
 Metrics/MethodLength:
@@ -15,7 +15,6 @@ Metrix/ClassLength:
   Max: 100
 Lint/AmbiguousBlockAssociation:
   Enabled: false
-
 Metrics/BlockLength:
   Exclude:
-    - Exclude: spec/*.rb
+    - spec/*.rb

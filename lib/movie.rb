@@ -5,17 +5,17 @@ module Kino
   class Movie
     include Virtus.model
 
-  class Minutes < Virtus::Attribute
-    def coerce(value)
-      value.to_i
+    class Minutes < Virtus::Attribute
+      def coerce(value)
+        value.to_i
+      end
     end
-  end
 
-  class StringArray < Virtus::Attribute
-    def coerce(value)
-      value.split(',').to_a
+    class StringArray < Virtus::Attribute
+      def coerce(value)
+        value.split(',').to_a
+      end
     end
-  end
 
     attribute :link, String
     attribute :name, String
@@ -27,7 +27,7 @@ module Kino
     attribute :rate, String
     attribute :producer, String
     attribute :actors, StringArray
-    def initialize(hash = {}, ginfo, bigcol) # rubocop:disable Metrics/AbcSize
+    def initialize(ginfo, bigcol, hash = {})
       super(hash)
       @information = ginfo
       @bigcol = bigcol

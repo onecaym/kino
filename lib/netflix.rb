@@ -1,3 +1,5 @@
+require_relative './gensel'
+require_relative './countsel'
 require_relative 'movie_collection.rb'
 require_relative 'movie.rb'
 require_relative './ancient_movie'
@@ -95,6 +97,14 @@ module Kino
       if filter(name: one_movie).empty?
 
       filter(name: one_movie).first.cost
+    end
+
+    def by_genre
+      Selectbygenre.new(self)
+    end
+
+    def by_country
+      Selectbycountry.new(self)
     end
   end
 end
