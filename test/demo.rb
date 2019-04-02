@@ -7,7 +7,7 @@ require 'csv'
 require 'money'
 movies = Kino::MovieCollection.new('../lib/movies.txt')
 netflix = Kino::Netflix.new('../lib/movies.txt')
-theater = Kino::Theater.new('../lib/movies.txt')
+# theater = Kino::Theater.new('../lib/movies.txt')
 # puts 'ALL'
 # puts movies.all.first(0)
 # puts 'SORTED'
@@ -59,7 +59,7 @@ theater = Kino::Theater.new('../lib/movies.txt')
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
-theaters = Theater.new do
+theaters = Kino::Theater.new do
     hall :red, title: 'Красный зал', places: 100
     end
-puts theaters.halls
+puts theaters.hall

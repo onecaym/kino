@@ -11,7 +11,7 @@ require 'time'
 module Kino
   class Theater < MovieCollection
     def initialize(&block)
-      @halls = []
+      @hall = []
       instance_eval(&block)
     end
     include Cashbox
@@ -44,8 +44,8 @@ module Kino
       puts "Вы купили билет на #{movie}"
     end
 
-    def halls(color, equip)
-      @halls << Hall.new(equip)
+    def hall(color, equip)
+      @hall << Hall.new(color,equip)
     end
   end
 end
