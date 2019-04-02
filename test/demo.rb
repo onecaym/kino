@@ -2,6 +2,7 @@ require_relative '../lib/movie_collection'
 require_relative '../lib/movie.rb'
 require_relative '../lib/netflix.rb'
 require_relative '../lib/theater.rb'
+require_relative '../lib/kinoteatr.rb'
 require 'csv'
 require 'money'
 movies = Kino::MovieCollection.new('../lib/movies.txt')
@@ -16,7 +17,7 @@ theater = Kino::Theater.new('../lib/movies.txt')
 # puts movies.stats(:producer).first(0)
 # puts 'Has Genre?'
 # puts movies.all.first.year.class
-puts netflix.pay(2000)
+#puts netflix.pay(2000)
 # p netflix.show(genre: "Comedy")
 # puts netflix.balance
 # puts netflix.all.first
@@ -28,7 +29,7 @@ puts netflix.pay(2000)
 # p theater.show(Time.new(2012, 10, 31, 15, 0).strftime("%H:%M"))
 # puts theater.show(Time.new(2012, 10, 31, 1, 0).strftime("%H:%M"))
 # puts theater.when?("Castle in the Sky")
-# puts theater.money
+#puts theater.period
 # puts theater.cash
 # puts theater.add_money(500)
 # puts theater.cash
@@ -57,4 +58,8 @@ puts netflix.pay(2000)
 # puts netflix.show(oldest: 1922)
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
-puts netflix.by_country.new_zealand
+#puts netflix.by_country.new_zealand
+theaters = Theater.new do
+    hall :red, title: 'Красный зал', places: 100
+    end
+puts theaters.halls

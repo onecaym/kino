@@ -5,10 +5,15 @@ require_relative './classic_movie'
 require_relative './modern_movie'
 require_relative './new_movie'
 require_relative './cashbox'
+require_relative './kinoteatr'
 require 'csv'
 require 'time'
 module Kino
   class Theater < MovieCollection
+    def initialize(&block)
+      @halls = []
+      instance_eval(&block)
+    end
     include Cashbox
     TIME = { '05:00'..'11:59' => { period: :classic },
              '12:00'..'23:59' => { genre: %w[Comedy Adventure] },
@@ -37,6 +42,10 @@ module Kino
 
       add_money(filter(name: movie).first.cost * 100)
       puts "Вы купили билет на #{movie}"
+    end
+
+    def halls(color, equip)
+      @halls << Hall.new(equip)
     end
   end
 end
