@@ -55,7 +55,7 @@ module Kino
     end
 
     def valid?
-      alike
+      @periods.select {|time| time.alike}
     end
   end
 end

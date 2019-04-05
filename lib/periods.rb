@@ -35,7 +35,7 @@ module Kino
     end
 
     def alike
-    	puts @timerange
+    	p @timerange.first
     end
   end
 end
