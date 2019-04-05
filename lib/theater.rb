@@ -5,13 +5,15 @@ require_relative './classic_movie'
 require_relative './modern_movie'
 require_relative './new_movie'
 require_relative './cashbox'
-require_relative './kinoteatr'
+require_relative './halls'
+require_relative './periods'
 require 'csv'
 require 'time'
 module Kino
   class Theater < MovieCollection
     def initialize(&block)
-      @hall = []
+      @halls = []
+      @periods = []
       instance_eval(&block)
     end
     include Cashbox
@@ -44,8 +46,16 @@ module Kino
       puts "Вы купили билет на #{movie}"
     end
 
-    def hall(color, equip)
-      @hall << Hall.new(color,equip)
+    def hall(name,describ)
+      @halls << Hall.new(name,describ)
+    end
+
+    def period(time, &block)
+      @periods << Period.new(time, &block)
+    end
+
+    def valid?
+      alike
     end
   end
 end
