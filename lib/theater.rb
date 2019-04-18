@@ -11,7 +11,9 @@ require 'csv'
 require 'time'
 module Kino
   class Theater < MovieCollection
-    def initialize(&block)
+    attr_reader :halls, :periods
+    def initialize(col, &block)
+      super
       @halls = []
       @periods = []
       instance_eval(&block)
@@ -21,12 +23,10 @@ module Kino
              '12:00'..'23:59' => { genre: %w[Comedy Adventure] },
              '00:00'..'04:59' => { genre: %w[Drama Horror] } }.freeze
 
-    def show(filtered_films)
-      movie = filter(TIME.select { |daytime| daytime.cover? filtered_films }.values.first).sample
-      timenow = Time.now
-      start = timenow.strftime('%H:%M')
-      "Now showing: #{movie.name} (#{start} -" \
-        "- #{(timenow + (60 * movie.time)).strftime('%H:%M')})"
+    def show(time,hall)
+      true_period = @periods.select { |per| per.timerange.cover?(time) }
+      rand_movie = filter(true_period.first.cur_filters).sample
+      print "Now showing: #{rand_movie.name} #{Time.at(0).utc.strftime('%H:%M:%S')} - #{Time.at(rand_movie.time * 60).utc.strftime('%H:%M:%S')}"
     end
 
     def current_movie(filtered_films)
@@ -43,7 +43,7 @@ module Kino
       raise NameError, 'Такого фильма нет в прокате' if filter(name: movie).empty?
 
       add_money(filter(name: movie).first.cost * 100)
-      puts "Вы купили билет на #{movie}"
+      print "Вы купили билет на #{movie}"
     end
 
     def hall(name,describ)
@@ -55,7 +55,8 @@ module Kino
     end
 
     def valid?
-      @periods.select {|time| time.alike}
+      combine = @periods.combination(2)
+      combine.none? { |first, second| first.overlap?(second) }
     end
   end
 end
