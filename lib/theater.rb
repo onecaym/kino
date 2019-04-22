@@ -23,10 +23,16 @@ module Kino
              '12:00'..'23:59' => { genre: %w[Comedy Adventure] },
              '00:00'..'04:59' => { genre: %w[Drama Horror] } }.freeze
 
-    def show(time,hall)
+    def mov(time, _hall)
       true_period = @periods.select { |per| per.timerange.cover?(time) }
-      rand_movie = filter(true_period.first.cur_filters).sample
-      print "Now showing: #{rand_movie.name} #{Time.at(0).utc.strftime('%H:%M:%S')} - #{Time.at(rand_movie.time * 60).utc.strftime('%H:%M:%S')}"
+      filter(true_period.first.cur_filters)
+    end
+
+    def show(time, hall)
+      timenow = Time.now
+      rand_movie = mov(time, hall).sample
+      print "Now showing: #{rand_movie.name} (#{timenow.strftime('%H:%M')}"\
+      " -- #{(timenow + (60 * rand_movie.time)).strftime('%H:%M')})"
     end
 
     def current_movie(filtered_films)
@@ -36,7 +42,8 @@ module Kino
     def when?(filtered_films)
       raise ArgumentError, 'This name is not exist' if filter(name: filtered_films).empty?
 
-      TIME.detect { |_time, filters| filter(filters).any? { |f| f.name == filtered_films } }.first
+      print TIME.detect\
+      { |_time, filters| filter(filters).any? { |f| f.name == filtered_films } }.first
     end
 
     def buy_ticket(movie)
@@ -46,8 +53,8 @@ module Kino
       print "Вы купили билет на #{movie}"
     end
 
-    def hall(name,describ)
-      @halls << Hall.new(name,describ)
+    def hall(name, describ)
+      @halls << Hall.new(name, describ)
     end
 
     def period(time, &block)

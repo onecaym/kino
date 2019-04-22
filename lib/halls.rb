@@ -3,10 +3,10 @@ module Kino
   class Hall
     attr_reader :color, :title, :places
 
-    def initialize(color, parametr)
+    def initialize(color, title:, places:)
       @color = color
-      @title = parametr[:title]
-      @places = parametr[:places]
+      @title = title
+      @places = places
     end
   end
 end
