@@ -27,7 +27,7 @@ module Kino
     attribute :rate, String
     attribute :producer, String
     attribute :actors, StringArray
-    def initialize(hash = {}, ginfo, bigcol)
+    def initialize(hash, ginfo, bigcol)
       super(hash)
       @information = ginfo
       @bigcol = bigcol

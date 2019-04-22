@@ -6,37 +6,68 @@ module Kino
   describe Theater do
     let(:theater) do
       Theater.new('lib/movies.txt') do
-        hall :red, title: 'Красный зал', places: 100
-        hall :blue, title: 'Синий зал', places: 50
-        hall :green, title: 'Зелёный зал (deluxe)', places: 12
-
         period '09:00'..'11:00' do
-          description 'Утренний сеанс'
-          filters genre: 'Comedy', year: 1900..1980
-          price 10
           hall :red, :blue
         end
 
         period '11:00'..'16:00' do
-          description 'Спецпоказ'
-          title 'The Terminator'
-          price 50
           hall :green
         end
 
         period '16:00'..'20:00' do
-          description 'Вечерний сеанс'
-          filters genre: %w[Action Drama], year: 2007..Time.now.year, title: 'Mad Max: Fury Road'
-          price 20
           hall :red, :blue
         end
 
         period '19:00'..'22:00' do
-          description 'Вечерний сеанс для киноманов'
-          filters year: 1900..1945, exclude_country: 'USA', title: 'M'
-          price 30
           hall :green
         end
+      end
+    end
+    subject { timetable.valid? }
+    describe 'valid?' do
+      context 'when timetable correct' do
+        let(:timetable) do
+          Theater.new('lib/movies.txt') do
+            period '09:00'..'11:00' do
+              hall :green
+            end
+
+            period '11:00'..'16:00' do
+              hall :green
+            end
+
+            period '16:00'..'20:00' do
+              hall :green
+            end
+
+            period '19:00'..'22:00' do
+              hall :green
+            end
+          end
+        end
+        it { is_expected.to eq false }
+      end
+      context 'when timetable incorrect' do
+        let(:timetable) do
+          Theater.new('lib/movies.txt') do
+            period '09:00'..'11:00' do
+              hall :red, :blue
+            end
+
+            period '11:00'..'16:00' do
+              hall :green
+            end
+
+            period '16:00'..'20:00' do
+              hall :red, :blue
+            end
+
+            period '19:00'..'22:00' do
+              hall :green
+            end
+          end
+        end
+        it { is_expected.to eq true }
       end
     end
 
@@ -58,54 +89,6 @@ module Kino
       context 'incorrect movie name' do
         it 'returns Argument Error' do
           expect { theater.when?('Simpsons') }.to raise_error(ArgumentError, 'This name is not exist')
-        end
-      end
-    end
-
-    let(:theater2) do
-      Theater.new('lib/movies.txt') do
-        hall :red, title: 'Красный зал', places: 100
-        hall :blue, title: 'Синий зал', places: 50
-        hall :green, title: 'Зелёный зал (deluxe)', places: 12
-
-        period '09:00'..'11:00' do
-          description 'Утренний сеанс'
-          filters genre: 'Comedy', year: 1900..1980
-          price 10
-          hall :green
-        end
-
-        period '11:00'..'16:00' do
-          description 'Спецпоказ'
-          title 'The Terminator'
-          price 50
-          hall :green
-        end
-
-        period '16:00'..'20:00' do
-          description 'Вечерний сеанс'
-          filters genre: %w[Action Drama], year: 2007..Time.now.year
-          price 20
-          hall :green
-        end
-
-        period '19:00'..'22:00' do
-          description 'Вечерний сеанс для киноманов'
-          filters year: 1900..1945, exclude_country: 'USA'
-          price 30
-          hall :green
-        end
-      end
-    end
-    describe 'valid?' do
-      context 'when timetable correct' do
-        it 'checks the timetable' do
-          expect(theater.valid?).to be true
-        end
-      end
-      context 'when timetable incorrect' do
-        it 'checks the timetable' do
-          expect(theater2.valid?).to be false
         end
       end
     end
