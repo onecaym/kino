@@ -2,11 +2,13 @@ require_relative '../lib/movie_collection'
 require_relative '../lib/movie.rb'
 require_relative '../lib/netflix.rb'
 require_relative '../lib/theater.rb'
+require_relative '../lib/halls.rb'
+require_relative '../lib/periods.rb'
 require 'csv'
 require 'money'
 movies = Kino::MovieCollection.new('../lib/movies.txt')
 netflix = Kino::Netflix.new('../lib/movies.txt')
-theater = Kino::Theater.new('../lib/movies.txt')
+# theater = Kino::Theater.new('../lib/movies.txt')
 # puts 'ALL'
 # puts movies.all.first(0)
 # puts 'SORTED'
@@ -16,7 +18,7 @@ theater = Kino::Theater.new('../lib/movies.txt')
 # puts movies.stats(:producer).first(0)
 # puts 'Has Genre?'
 # puts movies.all.first.year.class
-puts netflix.pay(2000)
+#puts netflix.pay(2000)
 # p netflix.show(genre: "Comedy")
 # puts netflix.balance
 # puts netflix.all.first
@@ -28,7 +30,7 @@ puts netflix.pay(2000)
 # p theater.show(Time.new(2012, 10, 31, 15, 0).strftime("%H:%M"))
 # puts theater.show(Time.new(2012, 10, 31, 1, 0).strftime("%H:%M"))
 # puts theater.when?("Castle in the Sky")
-# puts theater.money
+#puts theater.period
 # puts theater.cash
 # puts theater.add_money(500)
 # puts theater.cash
@@ -57,4 +59,74 @@ puts netflix.pay(2000)
 # puts netflix.show(oldest: 1922)
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
-puts netflix.by_country.new_zealand
+#puts netflix.by_country.new_zealand
+theater = Kino::Theater.new('../lib/movies.txt') do
+    hall :red, title: 'Красный зал', places: 100
+    hall :blue, title: 'Синий зал', places: 50
+    hall :green, title: 'Зелёный зал (deluxe)', places: 12
+
+    period '09:00'..'11:00' do
+      description 'Утренний сеанс'
+      filters genre: 'Comedy', year: 1900..1980
+      price 10
+      hall :green
+    end
+
+    period '11:00'..'16:00' do
+      description 'Спецпоказ'
+      title 'The Terminator'
+      price 50
+      hall :green
+    end
+
+    period '16:00'..'20:00' do
+      description 'Вечерний сеанс'
+      filters genre: ['Action', 'Drama'], year: 2007..Time.now.year
+      price 20
+      hall :green
+    end
+
+    period '19:00'..'22:00' do
+      description 'Вечерний сеанс для киноманов'
+      filters year: 1900..1945, exclude_country: 'USA'
+      price 30
+      hall :green
+    end
+end
+ # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
+  puts theater.valid?
+  # puts theater.filter(genre: 'Comedy', year: 1900..1980)
+  # puts theater.when?("Castle in the Sky")
+#   theater = Kino::Theater.new('../lib/movies.txt') do
+#     hall :red, title: 'Красный зал', places: 100
+#     hall :blue, title: 'Синий зал', places: 50
+#     hall :green, title: 'Зелёный зал (deluxe)', places: 12
+
+#     period '09:00'..'11:00' do
+#       description 'Утренний сеанс'
+#       filters genre: 'Comedy', year: 1900..1980
+#       price 10
+#       hall :red, :blue
+#     end
+
+#     period '11:00'..'16:00' do
+#       description 'Спецпоказ'
+#       title 'The Terminator'
+#       price 50
+#       hall :green
+#     end
+
+#     period '16:00'..'20:00' do
+#       description 'Вечерний сеанс'
+#       filters genre: ['Action', 'Drama'], year: 2007..Time.now.year
+#       price 20
+#       hall :red, :blue
+#     end
+
+#     period '19:00'..'22:00' do
+#       description 'Вечерний сеанс для киноманов'
+#       filters year: 1900..1945, exclude_country: 'USA'
+#       price 30
+#       hall :green
+#     end
+# end
