@@ -93,8 +93,34 @@ theater = Kino::Theater.new('../lib/movies.txt') do
       hall :green
     end
 end
+filmtable = movies.map {|e|
+  "<tr>\
+  <td>#{e.name}</td>\
+  <td>#{e.producer}</td>\
+  <td>#{e.actors}</td>\
+  <td>#{e.rate}</td>\
+  </tr>"}.join
+    filmtable
+    # p movies.first.producer.class
+    # p movies.first
+File.write("kinos.html","
+  <html>
+    <table cellspacing='5' border = '1'>
+    <tbody>
+    <tr>
+    <th>Tittle</th>
+    <th>Producer</th>
+    <th>Actors</th>
+    <th>Rate</th>
+    </tr>
+    #{filmtable}
+    </tbody>
+    </table>
+  </html>")
+p movies.map { |e| e.link[0] }
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
-  puts theater.valid?
+ # File.write('kino.html',"<H1><% film /%> </H1>")
+# puts theater
   # puts theater.filter(genre: 'Comedy', year: 1900..1980)
   # puts theater.when?("Castle in the Sky")
 #   theater = Kino::Theater.new('../lib/movies.txt') do
