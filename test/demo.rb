@@ -4,6 +4,7 @@ require_relative '../lib/netflix.rb'
 require_relative '../lib/theater.rb'
 require_relative '../lib/halls.rb'
 require_relative '../lib/periods.rb'
+require_relative '../test/tmdb.rb'
 require 'csv'
 require 'money'
 movies = Kino::MovieCollection.new('../lib/movies.txt')
@@ -99,6 +100,8 @@ filmtable = movies.map {|e|
   <td>#{e.producer}</td>\
   <td>#{e.actors}</td>\
   <td>#{e.rate}</td>\
+  <td>#{e.budget}$</td>\
+  <td><img src = #{e.picture}></td>\
   </tr>"}.join
     filmtable
     # p movies.first.producer.class
@@ -112,12 +115,15 @@ File.write("kinos.html","
     <th>Producer</th>
     <th>Actors</th>
     <th>Rate</th>
+    <th>Budget</th>
+    <th>Poster</th>
     </tr>
     #{filmtable}
     </tbody>
     </table>
   </html>")
-p movies.map { |e| e.link[0] }
+# mov = Kino::MovieDB.new(movie_id)
+# p mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
  # File.write('kino.html',"<H1><% film /%> </H1>")
 # puts theater

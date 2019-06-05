@@ -1,9 +1,11 @@
 require 'csv'
 require_relative 'movie_collection.rb'
 require 'virtus'
+require_relative '../test/tmdb.rb'
 module Kino
   class Movie
     include Virtus.model
+
 
     class Minutes < Virtus::Attribute
       def coerce(value)
@@ -31,6 +33,15 @@ module Kino
       super(hash)
       @information = ginfo
       @bigcol = bigcol
+    end
+    include MovieDB
+
+    def picture
+      picturelink(self.link[22..30])
+    end
+
+    def budget
+      filmbudget(self.link[22..30])
     end
 
     def matches?(head, value)
