@@ -44,6 +44,9 @@ module Kino
       filmbudget(self.link[22..30])
     end
 
+    def translate
+      translation(self.link[22..30])
+    end
     def matches?(head, value)
       (Array(send(head)) & Array(value)).any?
     end

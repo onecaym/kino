@@ -96,11 +96,11 @@ theater = Kino::Theater.new('../lib/movies.txt') do
 end
 filmtable = movies.map {|e|
   "<tr>\
-  <td>#{e.name}</td>\
+  <td>#{e.translate} (#{e.name})</td>\
   <td>#{e.producer}</td>\
   <td>#{e.actors}</td>\
   <td>#{e.rate}</td>\
-  <td>#{e.budget}$</td>\
+  <td>#{e.budget}</td>\
   <td><img src = #{e.picture}></td>\
   </tr>"}.join
     filmtable

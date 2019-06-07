@@ -16,5 +16,10 @@ module Kino
 			movie = Tmdb::Movie.detail(id)
 			movie['budget']
 		end
+
+		def translation(id)
+			Tmdb::Api.language("ru")
+			p movie = Tmdb::Movie.detail(id)['title']
+		end
 	end
 end
