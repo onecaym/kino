@@ -1,0 +1,14 @@
+%html
+  %table(cellspacing='5' border = '1')
+    %tbody
+    - movies.each do |movie|
+      %tr
+        %td>= - "#{movie.name} (#{movie.translate})"
+        %td>= movie.producer
+        %td>= movie.actors
+        %td>= movie.rate
+        %td>= movie.budget
+        %td
+          %img{:src => "#{movie.picture}"} 
+
+

@@ -5,8 +5,10 @@ require_relative '../lib/theater.rb'
 require_relative '../lib/halls.rb'
 require_relative '../lib/periods.rb'
 require_relative '../test/tmdb.rb'
+# require_relative '../test/web.haml'
 require 'csv'
 require 'money'
+require 'haml'
 movies = Kino::MovieCollection.new('../lib/movies.txt')
 netflix = Kino::Netflix.new('../lib/movies.txt')
 # theater = Kino::Theater.new('../lib/movies.txt')
@@ -94,34 +96,10 @@ theater = Kino::Theater.new('../lib/movies.txt') do
       hall :green
     end
 end
-filmtable = movies.map {|e|
-  "<tr>\
-  <td>#{e.translate} (#{e.name})</td>\
-  <td>#{e.producer}</td>\
-  <td>#{e.actors}</td>\
-  <td>#{e.rate}</td>\
-  <td>#{e.budget}</td>\
-  <td><img src = #{e.picture}></td>\
-  </tr>"}.join
-    filmtable
-    # p movies.first.producer.class
-    # p movies.first
-File.write("kinos.html","
-  <html>
-    <table cellspacing='5' border = '1'>
-    <tbody>
-    <tr>
-    <th>Tittle</th>
-    <th>Producer</th>
-    <th>Actors</th>
-    <th>Rate</th>
-    <th>Budget</th>
-    <th>Poster</th>
-    </tr>
-    #{filmtable}
-    </tbody>
-    </table>
-  </html>")
+template = File.read('../test/web.haml')
+engine = Haml::Engine.new(template)
+output = engine.render(Object.new, movies: movies)
+File.write("newcol.html", output)
 # mov = Kino::MovieDB.new(movie_id)
 # p mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
