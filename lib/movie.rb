@@ -2,10 +2,11 @@ require 'csv'
 require_relative 'movie_collection.rb'
 require 'virtus'
 require_relative '../test/tmdb.rb'
+require 'nokogiri'
+require 'open-uri'
 module Kino
   class Movie
     include Virtus.model
-
 
     class Minutes < Virtus::Attribute
       def coerce(value)
@@ -37,16 +38,28 @@ module Kino
     include MovieDB
 
     def picture
-      picturelink(self.link[22..30])
+      picturelink(link[22..30])
     end
 
     def budget
-      filmbudget(self.link[22..30])
+      filmbudget(link[22..30])
     end
 
     def translate
-      translation(self.link[22..30])
+      translation(link[22..30])
     end
+
+    def nokbudget
+      page = Nokogiri::HTML(open(link.to_s)) # rubocop:disable Security/Open
+      # p budget = page.css('div[id="titleDetails"]').css('div[class="txt-block"]')[6].text
+      budget = page.at('div.txt-block:contains("Budget:")')
+      if !budget.nil?
+        budget.text.strip.sub(/Budget:/, '').sub(/[(]estimated[)]/, '')
+      else
+        'Неизвестно'
+      end
+    end
+
     def matches?(head, value)
       (Array(send(head)) & Array(value)).any?
     end
