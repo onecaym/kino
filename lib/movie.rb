@@ -37,16 +37,20 @@ module Kino
     end
     include MovieDB
 
+    def movie_id
+      link[22..30]
+    end
+
     def picture
-      picturelink(link[22..30])
+      picturelink(movie_id)
     end
 
     def budget
-      filmbudget(link[22..30])
+      filmbudget(movie_id)
     end
 
     def translate
-      translation(link[22..30])
+      translation(movie_id)
     end
 
     def nokbudget

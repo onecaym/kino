@@ -5,6 +5,7 @@ require_relative '../lib/theater.rb'
 require_relative '../lib/halls.rb'
 require_relative '../lib/periods.rb'
 require_relative '../test/tmdb.rb'
+require_relative '../bin/render.rb'
 # require_relative '../test/web.haml'
 require 'csv'
 require 'money'
@@ -63,6 +64,7 @@ netflix = Kino::Netflix.new('../lib/movies.txt')
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
+include Render
 theater = Kino::Theater.new('../lib/movies.txt') do
     hall :red, title: 'Красный зал', places: 100
     hall :blue, title: 'Синий зал', places: 50
@@ -96,10 +98,7 @@ theater = Kino::Theater.new('../lib/movies.txt') do
       hall :green
     end
 end
-template = File.read('../test/web.haml')
-engine = Haml::Engine.new(template)
-output = engine.render(Object.new, movies: movies)
-File.write("newcol.html", output)
+renderfilm(movies)
 # mov = Kino::MovieDB.new(movie_id)
 # p mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)

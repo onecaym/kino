@@ -1,9 +1,9 @@
 require 'themoviedb'
+require 'dotenv/load'
 module Kino
   module MovieDB
-    Tmdb::Api.key('e05cae74c45af026ca21e22e06715c5d')
+    Tmdb::Api.key(ENV['TMDBKEY'])
     def picturelink(id)
-      Tmdb::Api.key('e05cae74c45af026ca21e22e06715c5d')
       configuration = Tmdb::Configuration.new
       url = configuration.base_url
       @film = Tmdb::Find.imdb_id(id)
