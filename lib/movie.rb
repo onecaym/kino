@@ -4,6 +4,7 @@ require 'virtus'
 require_relative '../test/tmdb.rb'
 require 'nokogiri'
 require 'open-uri'
+require 'yaml'
 module Kino
   class Movie
     include Virtus.model
@@ -41,27 +42,31 @@ module Kino
       link[22..30]
     end
 
-    def picture
-      picturelink(movie_id)
+    def load_fm_yml(par)
+      lib = YAML.load_file('../test/libs.yaml')
+      lib[movie_id][par]
     end
 
-    def budget
-      filmbudget(movie_id)
+    def picture
+      load_fm_yml(:picture) || picturelink(movie_id)
     end
 
     def translate
-      translation(movie_id)
+      load_fm_yml(:translate) || translation(movie_id)
+    end
+
+    def budget_loader
+      page = Nokogiri::HTML(open(link.to_s)) # rubocop:disable Security/Open
+      budget = page.at('div.txt-block:contains("Budget:")')
+      if budget.nil?
+        'Неизвестно'
+      else
+        budget.text.strip.sub(/Budget:/, '').sub(/[(]estimated[)]/, '')
+      end
     end
 
     def nokbudget
-      page = Nokogiri::HTML(open(link.to_s)) # rubocop:disable Security/Open
-      # p budget = page.css('div[id="titleDetails"]').css('div[class="txt-block"]')[6].text
-      budget = page.at('div.txt-block:contains("Budget:")')
-      if !budget.nil?
-        budget.text.strip.sub(/Budget:/, '').sub(/[(]estimated[)]/, '')
-      else
-        'Неизвестно'
-      end
+      load_fm_yml(:budget) || budget_loader
     end
 
     def matches?(head, value)

@@ -4,6 +4,7 @@ require_relative './classic_movie'
 require_relative './modern_movie'
 require_relative './new_movie'
 require_relative 'movie.rb'
+require_relative 'downloader.rb'
 module Kino
   class MovieCollection
     include Enumerable
@@ -69,6 +70,10 @@ module Kino
 
     def genrelist
       @movies.flat_map(&:genre).uniq
+    end
+
+    def downloader
+      Downloader.new(@movies)
     end
   end
 end

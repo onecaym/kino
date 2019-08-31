@@ -3,7 +3,7 @@
     %tbody
     - movies.each do |movie|
       %tr
-        %td>= - "#{movie.name} (#{movie.translate})"
+        %td>= - "#{p movie.name} (#{movie.translate})"
         %td>= movie.producer
         %td>= movie.actors
         %td>= movie.rate

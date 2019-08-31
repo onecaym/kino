@@ -98,6 +98,8 @@ theater = Kino::Theater.new('../lib/movies.txt') do
       hall :green
     end
 end
+sav = movies.downloader
+# sav.saver
 renderfilm(movies)
 # mov = Kino::MovieDB.new(movie_id)
 # p mov
