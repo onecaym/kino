@@ -48,25 +48,15 @@ module Kino
     end
 
     def picture
-      load_fm_yml(:picture) || picturelink(movie_id)
+      load_fm_yml(:picture)
     end
 
     def translate
-      load_fm_yml(:translate) || translation(movie_id)
-    end
-
-    def budget_loader
-      page = Nokogiri::HTML(open(link.to_s)) # rubocop:disable Security/Open
-      budget = page.at('div.txt-block:contains("Budget:")')
-      if budget.nil?
-        'Неизвестно'
-      else
-        budget.text.strip.sub(/Budget:/, '').sub(/[(]estimated[)]/, '')
-      end
+      load_fm_yml(:translate)
     end
 
     def nokbudget
-      load_fm_yml(:budget) || budget_loader
+      load_fm_yml(:budget)
     end
 
     def matches?(head, value)

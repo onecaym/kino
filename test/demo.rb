@@ -64,7 +64,6 @@ netflix = Kino::Netflix.new('../lib/movies.txt')
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
-include Render
 theater = Kino::Theater.new('../lib/movies.txt') do
     hall :red, title: 'Красный зал', places: 100
     hall :blue, title: 'Синий зал', places: 50
@@ -100,7 +99,6 @@ theater = Kino::Theater.new('../lib/movies.txt') do
 end
 sav = movies.downloader
 # sav.saver
-renderfilm(movies)
 # mov = Kino::MovieDB.new(movie_id)
 # p mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
