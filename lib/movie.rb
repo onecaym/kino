@@ -1,7 +1,7 @@
 require 'csv'
 require_relative 'movie_collection.rb'
 require 'virtus'
-require_relative '../test/tmdb.rb'
+require_relative '../lib/tmdb.rb'
 require 'nokogiri'
 require 'open-uri'
 require 'yaml'
@@ -43,7 +43,7 @@ module Kino
     end
 
     def load_fm_yml(par)
-      lib = YAML.load_file('../test/libs.yaml')
+      lib = YAML.load_file('../lib/libs.yaml')
       lib[movie_id][par]
     end
 
@@ -56,7 +56,11 @@ module Kino
     end
 
     def nokbudget
-      load_fm_yml(:budget)
+      if load_fm_yml(:budget) != nil
+        load_fm_yml(:budget)
+      else
+        "Неизвестно"
+      end
     end
 
     def matches?(head, value)
