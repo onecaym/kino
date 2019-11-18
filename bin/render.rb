@@ -10,5 +10,7 @@ unless yaml_lib.any?
   loader = Kino::Downloader.new
   loader.start
 end
+loader = Kino::Downloader.new
+  loader.start
   rend = Kino::Renderer.new
   rend.start
