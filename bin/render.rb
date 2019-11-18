@@ -1,17 +1,14 @@
 #!/usr/bin/env ruby
 require_relative '../lib/movie_collection.rb'
+require_relative '../lib/renderer.rb'
+require_relative '../lib/downloader.rb'
 require 'haml'
 require 'yaml'
 
-module Kino
-yaml_lib = File.open('../lib/libs.yaml')
+yaml_lib = File.open('../lib/data/libs.yaml')
 unless yaml_lib.any?
-  puts '1'
-  require_relative '../lib/downloader.rb'
-  Downloader.new
+  loader = Kino::Downloader.new
+  loader.start
 end
-puts '2'
-require_relative '../lib/renderer.rb'
-  Renderer.new
-
-end
+  rend = Kino::Renderer.new
+  rend.start

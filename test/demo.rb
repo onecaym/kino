@@ -10,8 +10,8 @@ require_relative '../bin/render.rb'
 require 'csv'
 require 'money'
 require 'haml'
-movies = Kino::MovieCollection.new('../lib/movies.txt')
-netflix = Kino::Netflix.new('../lib/movies.txt')
+movies = Kino::MovieCollection.new('../lib/data/movies.txt')
+netflix = Kino::Netflix.new('../lib/data/movies.txt')
 # theater = Kino::Theater.new('../lib/movies.txt')
 # puts 'ALL'
 # puts movies.all.first(0)
@@ -64,7 +64,7 @@ netflix = Kino::Netflix.new('../lib/movies.txt')
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
-theater = Kino::Theater.new('../lib/movies.txt') do
+theater = Kino::Theater.new('../lib/data/movies.txt') do
     hall :red, title: 'Красный зал', places: 100
     hall :blue, title: 'Синий зал', places: 50
     hall :green, title: 'Зелёный зал (deluxe)', places: 12

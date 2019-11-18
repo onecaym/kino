@@ -1,4 +1,4 @@
-require_relative './gensel'
+require_relative './select_by_genre.rb'
 require_relative './countsel'
 require_relative 'movie_collection.rb'
 require_relative 'movie.rb'

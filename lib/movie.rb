@@ -43,7 +43,7 @@ module Kino
     end
 
     def load_fm_yml(par)
-      lib = YAML.load_file('../lib/libs.yaml')
+      lib = YAML.load_file('../lib/data/libs.yaml')
       lib[movie_id][par]
     end
 
