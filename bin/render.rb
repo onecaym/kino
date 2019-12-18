@@ -10,7 +10,7 @@ unless yaml_lib.any?
   loader = Kino::Downloader.new
   loader.start
 end
-loader = Kino::Downloader.new
+loader = Kino::Downloader.new(Kino::MovieCollection.new('../lib/data/movies.txt'))
   loader.start
   rend = Kino::Renderer.new
   rend.start
