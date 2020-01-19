@@ -43,7 +43,8 @@ module Kino
     end
 
     def load_fm_yml(par)
-      lib = YAML.load_file('../lib/data/libs.yaml')
+      direction = File.expand_path('../lib/data/libs.yaml', __dir__)
+      lib = YAML.load_file(direction)
       lib[movie_id][par]
     end
 
