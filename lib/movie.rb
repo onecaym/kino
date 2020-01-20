@@ -57,10 +57,10 @@ module Kino
     end
 
     def nokbudget
-      if load_fm_yml(:budget) != nil
+      if !load_fm_yml(:budget).nil?
         load_fm_yml(:budget)
       else
-        "Неизвестно"
+        'Неизвестно'
       end
     end
 

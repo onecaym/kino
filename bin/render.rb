@@ -14,5 +14,5 @@ unless yaml_lib.any?
 end
 loader = Kino::Downloader.new(collection)
   loader.start
-  rend = Kino::Renderer.new(collection)
-  rend.start
+rend = Kino::Renderer.new(collection)
+rend.start
