@@ -1,7 +1,7 @@
 require_relative './netflix'
 
 module Kino
-  class Selectbycountry
+  class SelectByCountry
     def initialize(netflix_col)
       @movies = netflix_col
     end
