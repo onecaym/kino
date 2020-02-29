@@ -1,6 +1,7 @@
 This is a test project for MKDEV.ME wich can generate different webpages using a lot of information from IMDB.com
-# Installation
+## Installation
 ` $ gem install kino_test`
+____
 ## Usage
 
 ### Creating collection:
@@ -16,4 +17,6 @@ This is a test project for MKDEV.ME wich can generate different webpages using a
 `Kino::MovieCollection.new('movie.txt').stats(:director)`
 
 ### You can sort by something
-`Kino::MovieCollection.new('movie.txt').sort_by(:year)`
+`Kino::MovieCollection.new('movie.txt').sort_by(:year)`  
+___
+## Netflix functionality
