@@ -90,3 +90,15 @@ ___
       hall :green
     end
 `end`
+___
+### Check out if shedule is valid
+theater.valid?
+
+### When does theater show a movie you want:
+theater.when?('Pulp Fiction')
+
+### Buy movie ticket:
+theater.buy_ticket('Citizen Kane')
+
+### Show random movie in selected time period:
+theater.show('12:00')
