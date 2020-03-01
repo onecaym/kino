@@ -24,38 +24,35 @@ First we need to create the **Netflix** variable.
 
 `netflix = Kino::Netflix.new('movie.txt')`
 
-### Top up the balance:
-`netflix.pay(20)`
+### Add money to your balance:
+`netflix.pay(200)`
 
-### Showing user's balance:
+### Shows your balance:
 `netflix.balance`
 
-### Define user's filter:
-`netflix.define_filter(:new_sci_fi) { |movie, year| movie.year &gt; year &amp;&amp; ... }`
+### Defines user's filter:
+`netflix.define_filter(:oldest) {|movie,year| movie.year < year}`
 
-### Adding parameter to user's filter:
-`netflix.show(new_sci_fi: 2010)`
+### Add parameter to your filter:
+`netflix.show(oldest: 1922)`
 
-### Editing user's filter: 
-`netflix.define_filter(:newest_sci_fi, from: :new_sci_fi, arg: 2014)`
-
-### Showing random movie using some filters:
+### Show random movie:
 `netflix.show(genre: 'Comedy')`
 
-### Getting movie's price:
-`netflix.how_much?('Citizen Kane')`
+### SHow movie's price:
+`netflix.how_much?('The Shawshank Redemption')`
 
-### Showing all movies with selected genre using DSL:
+### Showing all selected movies chosen by genre with DSL:
 `netflix.by_genre.comedy`
 
-### Showing all movies with selected country using DSL:
+### Showing all selected movies chosen by country with DSL:
 `netflix.by_country.canada`
 
 ### Take money from the cashbox:
 `netflix.take('Bank')`
 ___
 ## Theater functionality
-This part of uor gem will work if we have a sheldue. You can use the standart sheldue and just change the modifications.
+This part of our gem will work if we have a sheldue. You can use the standart sheldue and just change the modifications.
 ___
 `theater = Kino::Theater.new('../lib/data/movies.txt') do
     hall :red, title: 'Красный зал', places: 100
@@ -91,14 +88,34 @@ ___
     end
 `end`
 ___
-### Check out if shedule is valid
-theater.valid?
+### Check out the validation of sheldue
+`theater.valid?`
 
 ### When does theater show a movie you want:
-theater.when?('Pulp Fiction')
+`theater.when?('The Shawshank Redemption')`
 
-### Buy movie ticket:
-theater.buy_ticket('Citizen Kane')
+### Buy ticket:
+`theater.buy_ticket('Citizen Kane')`
 
-### Show random movie in selected time period:
-theater.show('12:00')
+### Show random movie in selected period:
+`theater.show('18:00')`
+___
+## Using API and rendering
+
+`collection = MovieCollection.new('movies.txt')`
+
+### Initializing downloader
+`tmdb_downloader = Kino::Renderer.new(collection)`
+
+### Check info in yamllib:
+`yaml_lib = File.open('../lib/data/libs.yaml')`
+
+### Write all information to YAML file:
+`tmdb_downloader.write('./tmdb_info')`
+
+### Initializing downloader
+`loader = Kino::Downloader.new(collection)`
+
+### Start render:
+Everything will be automaticly uploaded if you don't have enough info for rendering. After that render will start automicly
+`ruby render.rb`
