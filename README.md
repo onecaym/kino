@@ -27,11 +27,10 @@ First we need to create the **Netflix** variable.
 ### Add money to your balance:
 `netflix.pay(200)`
 
-### Shows your balance:
-`netflix.balance`
-
 ### Defines user's filter:
 `netflix.define_filter(:oldest) {|movie,year| movie.year < year}`
+### Shows your balance:
+`netflix.balance`
 
 ### Add parameter to your filter:
 `netflix.show(oldest: 1922)`
@@ -41,15 +40,13 @@ First we need to create the **Netflix** variable.
 
 ### SHow movie's price:
 `netflix.how_much?('The Shawshank Redemption')`
-
+### Take money from the cashbox:
+`netflix.take('Bank')`
 ### Showing all selected movies chosen by genre with DSL:
 `netflix.by_genre.comedy`
 
 ### Showing all selected movies chosen by country with DSL:
 `netflix.by_country.canada`
-
-### Take money from the cashbox:
-`netflix.take('Bank')`
 ___
 ## Theater functionality
 This part of our gem will work if we have a sheldue. You can use the standart sheldue and just change the modifications.
@@ -94,11 +91,11 @@ ___
 ### When does theater show a movie you want:
 `theater.when?('The Shawshank Redemption')`
 
+### Show random movie in selected period:
+`theater.show('18:00')`
 ### Buy ticket:
 `theater.buy_ticket('Citizen Kane')`
 
-### Show random movie in selected period:
-`theater.show('18:00')`
 ___
 ## Using API and rendering
 
@@ -119,3 +116,4 @@ ___
 ### Start render:
 Everything will be automaticly uploaded if you don't have enough info for rendering. After that render will start automicly
 `ruby render.rb`
+___
