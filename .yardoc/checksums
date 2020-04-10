@@ -1,0 +1,17 @@
+lib/kino.rb 0f6d753cdc4c5b43f7c14dc84a8d3dc3cce52a7d
+lib/kino/halls.rb 796d402ece91a856834e9e7b455bb722d9cbc56d
+lib/kino/movie.rb f4e917cb57dbd5ae199ae6c4ae45e00fd0f2cd82
+lib/kino/cashbox.rb 77f0aebb941cdfdc9d4aac809a2dd09494354c2b
+lib/kino/moviedb.rb ec47cd37a22496a76618e6325837ee481c6035b3
+lib/kino/netflix.rb d40f63095b523e264b19472f460a73f5c266c311
+lib/kino/periods.rb 332535aedd82b2ad45a8d94acac7da7943317da5
+lib/kino/theater.rb 850857bf70ca2da0b4788c65aeafdebd79032f8b
+lib/kino/renderer.rb 4e49718225783283ee2aa617c2fa1bab924c5cc0
+lib/kino/new_movie.rb 5fe925542c9f9c91a9586bbf1c63218a2c9ce7d6
+lib/kino/downloader.rb b49ef5ce1c61b3ffeb48705db5fdd972ba61fb5a
+lib/kino/modern_movie.rb 670e9bb8dee1a16c2e36790fcbcd0808167c8e30
+lib/kino/ancient_movie.rb 302fe0ad73bdf079d075e9a346b49174ecbe0e6e
+lib/kino/classic_movie.rb 8a2d578e5d708cb05eda6de41230f3257e52f136
+lib/kino/select_by_genre.rb 809a6f396e473d12c957ae2a36d79a0d7b243cd4
+lib/kino/movie_collection.rb faf69d76e75c35c84362487127ace36214939f74
+lib/kino/select_by_country.rb 4d0632a0f15cb52d6401e744e16c00843d9e46ae

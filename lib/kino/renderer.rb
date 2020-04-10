@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../lib/movie_collection.rb'
+require_relative '../kino/movie_collection.rb'
 require 'haml'
 require 'yaml'
 
@@ -7,9 +7,9 @@ module Kino
   class Renderer
     def initialize(collection)
       @movies = collection
-      @directionweb = File.expand_path('../lib/templates/web.haml', __dir__)
-      @directionyaml = File.expand_path('../lib/data/libs.yaml', __dir__)
-      @directionlink = File.expand_path('../test/MovieBase.html', __dir__)
+      @directionweb = File.expand_path('../kino/templates/web.haml', __dir__)
+      @directionyaml = File.expand_path('../kino/data/libs.yaml', __dir__)
+      @directionlink = File.expand_path('./examples/movie.html', __dir__)
     end
 
     def start

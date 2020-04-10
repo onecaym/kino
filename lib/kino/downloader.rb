@@ -3,14 +3,14 @@ require_relative 'movie_collection.rb'
 require 'themoviedb'
 require 'dotenv/load'
 require 'yaml'
-require_relative '../lib/tmdb.rb'
+require_relative '../kino/moviedb.rb'
 require 'ruby-progressbar'
 
 module Kino
   class Downloader
     def initialize(collection)
       @movies = collection
-      @direction = File.expand_path('../lib/data/libs.yaml', __dir__)
+      @direction = File.expand_path('../kino/data/libs.yaml', __dir__)
     end
 
     def start

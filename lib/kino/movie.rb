@@ -1,7 +1,7 @@
 require 'csv'
 require_relative 'movie_collection.rb'
 require 'virtus'
-require_relative '../lib/tmdb.rb'
+require_relative '../kino/moviedb.rb'
 require 'nokogiri'
 require 'open-uri'
 require 'yaml'
@@ -43,7 +43,7 @@ module Kino
     end
 
     def load_fm_yml(par)
-      direction = File.expand_path('../lib/data/libs.yaml', __dir__)
+      direction = File.expand_path('../kino/data/libs.yaml', __dir__)
       lib = YAML.load_file(direction)
       lib[movie_id][par]
     end

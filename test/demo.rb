@@ -1,18 +1,18 @@
-require_relative '../lib/movie_collection'
-require_relative '../lib/movie.rb'
-require_relative '../lib/netflix.rb'
-require_relative '../lib/theater.rb'
-require_relative '../lib/halls.rb'
-require_relative '../lib/periods.rb'
-require_relative '../lib/tmdb.rb'
-require_relative '../bin/render.rb'
+require_relative '../lib/kino/movie_collection'
+require_relative '../lib/kino/movie.rb'
+require_relative '../lib/kino/netflix.rb'
+require_relative '../lib/kino/theater.rb'
+require_relative '../lib/kino/halls.rb'
+require_relative '../lib/kino/periods.rb'
+require_relative '../lib/kino/moviedb.rb'
 # require_relative '../test/web.haml'
 require 'csv'
 require 'money'
 require 'haml'
-movies = Kino::MovieCollection.new('../lib/data/movies.txt')
-netflix = Kino::Netflix.new('../lib/data/movies.txt')
-# theater = Kino::Theater.new('../lib/movies.txt')
+movies = Kino::MovieCollection.new('../lib/kino/data/movies.txt')
+netflix = Kino::Netflix.new('../lib/kino/data/movies.txt')
+p movies.each {|movie| movie }
+# theater = Kino::Theater.new('../lib/kino/data/movies.txt')
 # puts 'ALL'
 # puts movies.all.first(0)
 # puts 'SORTED'
@@ -47,8 +47,8 @@ netflix = Kino::Netflix.new('../lib/data/movies.txt')
 # puts Kino::Netflix.cash
 # puts movies.map { |movie| movie.year}
 # puts netflix.show { |movie| !movie.genre.include?('Terminator') && movie.genre.include?('Action') && movie.year > 2005}
-# puts netflix.define_filter(:new) {|movie| movie.genre.include?("Action")}
-# puts netflix.filter(new: true, year: 2005)
+# p netflix.define_filter(:new) {|movie| movie.genre.include?("Action")}
+#puts netflix.filter(new: true, year: 2005)
 # puts netflix.filter(genre: "Sci-Fi")
 # puts netflix.define_filter(:gt2010) {|movie| movie.year > 2011 }
 # puts netflix.define_filter(:newest_sci_fi, from: :gt2010, arg: 2014)
@@ -60,47 +60,46 @@ netflix = Kino::Netflix.new('../lib/data/movies.txt')
 # puts netflix.show(genre: 'Drama')
 # puts netflix.filter(gt2010: true, lt2012: true, country: 'USA')
 # puts netflix.define_filter(:oldest) {|movie,year| movie.year < year}
-# puts netflix.show(oldest: 1922)
+ # puts netflix.show(oldest: 1922)
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
-# puts netflix.by_genre.sci_fi
+ # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
-theater = Kino::Theater.new('../lib/data/movies.txt') do
-    hall :red, title: 'Красный зал', places: 100
-    hall :blue, title: 'Синий зал', places: 50
-    hall :green, title: 'Зелёный зал (deluxe)', places: 12
+# theater = Kino::Theater.new('../lib/kino/data/movies.txt') do
+#     hall :red, title: 'Красный зал', places: 100
+#     hall :blue, title: 'Синий зал', places: 50
+#     hall :green, title: 'Зелёный зал (deluxe)', places: 12
 
-    period '09:00'..'11:00' do
-      description 'Утренний сеанс'
-      filters genre: 'Comedy', year: 1900..1980
-      price 10
-      hall :green
-    end
+#     period '09:00'..'11:00' do
+#       description 'Утренний сеанс'
+#       filters genre: 'Comedy', year: 1900..1980
+#       price 10
+#       hall :green
+#     end
 
-    period '11:00'..'16:00' do
-      description 'Спецпоказ'
-      title 'The Terminator'
-      price 50
-      hall :green
-    end
+#     period '11:00'..'16:00' do
+#       description 'Спецпоказ'
+#       title 'The Terminator'
+#       price 50
+#       hall :green
+#     end
 
-    period '16:00'..'20:00' do
-      description 'Вечерний сеанс'
-      filters genre: ['Action', 'Drama'], year: 2007..Time.now.year
-      price 20
-      hall :green
-    end
+#     period '16:00'..'20:00' do
+#       description 'Вечерний сеанс'
+#       filters genre: ['Action', 'Drama'], year: 2007..Time.now.year
+#       price 20
+#       hall :green
+#     end
 
-    period '19:00'..'22:00' do
-      description 'Вечерний сеанс для киноманов'
-      filters year: 1900..1945, exclude_country: 'USA'
-      price 30
-      hall :green
-    end
-end
-sav = movies.downloader
+#     period '19:00'..'22:00' do
+#       description 'Вечерний сеанс для киноманов'
+#       filters year: 1900..1945, exclude_country: 'USA'
+#       price 30
+#       hall :green
+#     end
+# end
 # sav.saver
 # mov = Kino::MovieDB.new(movie_id)
-# p mov
+# puts mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
  # File.write('kino.html',"<H1><% film /%> </H1>")
 # puts theater
