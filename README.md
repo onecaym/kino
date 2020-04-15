@@ -1,6 +1,6 @@
 This is a test project for MKDEV.ME wich can generate different webpages using a lot of information from IMDB.com
 ## Installation
-` $ gem install kino_test`
+` $ gem install kino`
 ____
 ## Basic usage
 
