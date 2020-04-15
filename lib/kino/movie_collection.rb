@@ -29,7 +29,7 @@ module Kino
     # Выдает абсолютно все данные о каждом фильме
     # @example
     #  movies.each {|movie| movie }
-    def each 
+    def each
       @movies.each { |movie| yield movie }
     end
 
@@ -73,17 +73,17 @@ module Kino
       end
     end
 
-     # По параметрам отображает статистику
-     # @example
-     #  movies.stats(:producer)
-     def stats(header) # shows the stat
+    # По параметрам отображает статистику
+    # @example
+    #  movies.stats(:producer)
+    def stats(header) # shows the stat
       raise ArgumentError, "Field #{header} doesnt exist" \
       unless MOVIEFIELDS.include? header
 
       @movies.map { |e| e.send(header) }
              .flatten.group_by { |x| x }
              .map { |head, value| "#{head}: #{value.count}" }
-    end
+   end
 
     # Выдает список всех жанров фильмов из библиотеки
     def genrelist # shows all genres of library

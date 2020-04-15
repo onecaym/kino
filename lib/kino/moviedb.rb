@@ -18,7 +18,7 @@ module Kino
       return if budget.nil?
 
       cleanbudget = budget.text.strip.sub(/Budget:(.*) \(estimated\)/, '\1')
-      cleanbudget.delete("^0-9").to_i
+      cleanbudget.delete('^0-9').to_i
     end
 
     def translation(id)

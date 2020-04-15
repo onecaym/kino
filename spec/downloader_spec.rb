@@ -15,6 +15,6 @@ describe Kino::Downloader do
     # subject { File.read('./lib/data/libs.yaml') }
     subject { YAML.load_file('./lib/data/libs.yaml') }
     it { expect(subject.count).to eq(250) }
-    it { expect((subject["tt0111161"])).to eq({:budget=>25000000, :picture=>"http://image.tmdb.org/t/p/w92/", :translate=>"Побег из Шоушенка"})}
+    it { expect(subject['tt0111161']).to eq(budget: 25_000_000, picture: 'http://image.tmdb.org/t/p/w92/', translate: 'Побег из Шоушенка') }
   end
 end

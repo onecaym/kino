@@ -2,9 +2,9 @@
 require 'slop'
 require_relative '../lib/kino.rb'
 
-opts = Slop.parse do |o|
-	o.integer '--pay', 'money'
-  o.string '--show', 'show'
+opts = Slop.parse do |param|
+  param.integer '--pay', 'money'
+  param.string '--show', 'show'
 end
 
 money_amount = opts[:pay]
