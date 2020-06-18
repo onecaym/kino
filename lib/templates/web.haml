@@ -1,0 +1,16 @@
+- require 'ruby-progressbar'
+- bar = ProgressBar.create(total: 250, :format => '%a %B %p%% %t')
+%html
+  %table(cellspacing='5' border = '1')
+    %tbody
+    - movies.each do |movie|
+      %tr
+        %td>= - "#{bar.increment}; #{movie.name} (#{movie.translate})"
+        %td>= movie.producer
+        %td>= movie.actors
+        %td>= movie.rate
+        %td>= movie.nokbudget
+        %td
+          %img{:src => "#{movie.picture}"}
+
+

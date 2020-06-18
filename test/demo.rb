@@ -4,10 +4,14 @@ require_relative '../lib/netflix.rb'
 require_relative '../lib/theater.rb'
 require_relative '../lib/halls.rb'
 require_relative '../lib/periods.rb'
+require_relative '../lib/tmdb.rb'
+require_relative '../bin/render.rb'
+# require_relative '../test/web.haml'
 require 'csv'
 require 'money'
-movies = Kino::MovieCollection.new('../lib/movies.txt')
-netflix = Kino::Netflix.new('../lib/movies.txt')
+require 'haml'
+movies = Kino::MovieCollection.new('../lib/data/movies.txt')
+netflix = Kino::Netflix.new('../lib/data/movies.txt')
 # theater = Kino::Theater.new('../lib/movies.txt')
 # puts 'ALL'
 # puts movies.all.first(0)
@@ -60,7 +64,7 @@ netflix = Kino::Netflix.new('../lib/movies.txt')
 # puts netflix.show(genre: 'Drama') {|movie| movie.name.include?('Amores Perros')}
 # puts netflix.by_genre.sci_fi
 #puts netflix.by_country.new_zealand
-theater = Kino::Theater.new('../lib/movies.txt') do
+theater = Kino::Theater.new('../lib/data/movies.txt') do
     hall :red, title: 'Красный зал', places: 100
     hall :blue, title: 'Синий зал', places: 50
     hall :green, title: 'Зелёный зал (deluxe)', places: 12
@@ -93,8 +97,13 @@ theater = Kino::Theater.new('../lib/movies.txt') do
       hall :green
     end
 end
+sav = movies.downloader
+# sav.saver
+# mov = Kino::MovieDB.new(movie_id)
+# p mov
  # puts theater.show(Time.new(2012, 10, 31, 10, 0).strftime("%H:%M"),:green)
-  puts theater.valid?
+ # File.write('kino.html',"<H1><% film /%> </H1>")
+# puts theater
   # puts theater.filter(genre: 'Comedy', year: 1900..1980)
   # puts theater.when?("Castle in the Sky")
 #   theater = Kino::Theater.new('../lib/movies.txt') do

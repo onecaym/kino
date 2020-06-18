@@ -1,6 +1,10 @@
 require 'csv'
 require_relative 'movie_collection.rb'
 require 'virtus'
+require_relative '../lib/tmdb.rb'
+require 'nokogiri'
+require 'open-uri'
+require 'yaml'
 module Kino
   class Movie
     include Virtus.model
@@ -31,6 +35,33 @@ module Kino
       super(hash)
       @information = ginfo
       @bigcol = bigcol
+    end
+    include MovieDB
+
+    def movie_id
+      link[22..30]
+    end
+
+    def load_fm_yml(par)
+      direction = File.expand_path('../lib/data/libs.yaml', __dir__)
+      lib = YAML.load_file(direction)
+      lib[movie_id][par]
+    end
+
+    def picture
+      load_fm_yml(:picture)
+    end
+
+    def translate
+      load_fm_yml(:translate)
+    end
+
+    def nokbudget
+      if !load_fm_yml(:budget).nil?
+        load_fm_yml(:budget)
+      else
+        'Неизвестно'
+      end
     end
 
     def matches?(head, value)
